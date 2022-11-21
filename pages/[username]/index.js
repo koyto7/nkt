@@ -17,7 +17,15 @@ export async function getServerSideProps({ query }) {
   const { username } = query;
 
   const userDoc = await getUserWithUsername(username);
-  console.log(userDoc.ref.path);
+  // console.log(userDoc.ref.path);
+
+  // If no user, short circuit to 404 page
+  if (!userDoc) {
+    return {
+      notFound: true,
+    };
+  }
+}
 
   // JSON serializable data
   let user = null;
@@ -43,7 +51,7 @@ export async function getServerSideProps({ query }) {
     // posts = (await getDocs(postsQuery)).docs.map((doc) => doc.data());
     posts = (await getDocs(postsQuery)).docs.map(postToJSON);
 
-    console.log(posts);
+    // console.log(posts);
   }
 
   return {
