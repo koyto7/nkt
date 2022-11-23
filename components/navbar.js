@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { UserContext } from '../lib/context';
 
 // Top navbar
-export function Navbar() {
+export default function Navbar() {
   const { user, username } = useContext(UserContext);
 
   return (
