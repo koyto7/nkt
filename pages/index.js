@@ -1,7 +1,3 @@
-// import toast from 'react-hot-toast';
-{
-  /* <button onClick={() => toast.success('Toasted!')}>Toast Me</button> */
-}
 import { Metatags } from '../components/Metatags';
 import { PostFeed } from '../components/PostFeed';
 import Loader from '../components/Loader';
@@ -19,7 +15,7 @@ import {
 import { useState } from 'react';
 
 // Max post to query per page
-const LIMIT = 1;
+const LIMIT = 5;
 
 export async function getServerSideProps(context) {
   const postsQuery = fQuery(

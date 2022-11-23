@@ -1,4 +1,4 @@
-import { Metatags } from '../components/Metatags';
+import { Metatags } from '../../components/Metatags';
 import styles from '../../styles/Post.module.css';
 import PostContent from '../../components/PostContent';
 import { db, getUserWithUsername, postToJSON } from '../../lib/firebase';
@@ -36,7 +36,6 @@ export async function getStaticPaths() {
   const q = fQuery(collectionGroup(db, 'posts'));
   // console.log(q);
   const snapshot = await getDocs(q);
-  console.log(snapshot);
 
   const paths = snapshot.docs.map((doc) => {
     const { slug, username } = doc.data();

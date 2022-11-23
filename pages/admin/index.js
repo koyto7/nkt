@@ -1,6 +1,6 @@
 import styles from '../../styles/Admin.module.css';
 import AuthCheck from '../../components/AuthCheck';
-import PostFeed from '../../components/PostFeed';
+import { PostFeed } from '../../components/PostFeed';
 import toast from 'react-hot-toast';
 import kebabCase from 'lodash.kebabcase';
 import { useContext, useState } from 'react';
@@ -11,10 +11,11 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 
 import {
   serverTimestamp,
-  fquery,
+  query as fQuery,
   collection,
   orderBy,
   setDoc,
+  getDocs,
   doc,
 } from 'firebase/firestore';
 
@@ -22,29 +23,28 @@ export default function AdminPostsPage(props) {
   return (
     <main>
       <AuthCheck>
+        <PostList />
         <CreateNewPost />
       </AuthCheck>
     </main>
   );
 }
 
-console.log(auth.uid);
+function PostList() {
+  const uid = auth?.currentUser?.uid;
+  const ref = collection(db, 'users', uid, 'posts');
+  const postQuery = fQuery(ref);
+  const [querySnapshot] = useCollection(postQuery);
 
-// function PostList() {
-//   const uid = auth?.currentUser?.uid;
-//   const ref = collection(db, 'users', uid, 'posts');
-//   const postQuery = fquery(ref, orderBy('createdAt'));
-//   const [querySnapshot] = useCollection(postQuery);
+  const posts = querySnapshot?.docs.map((doc) => doc.data());
 
-//   const posts = querySnapshot?.docs.map((doc) => doc.data());
-
-//   return (
-//     <>
-//       <h1>Manage your Posts</h1>
-//       <PostFeed posts={posts} admin />
-//     </>
-//   );
-// }
+  return (
+    <>
+      <h1>Manage your Posts</h1>
+      <PostFeed posts={posts} admin />
+    </>
+  );
+}
 
 function CreateNewPost() {
   const router = useRouter();
