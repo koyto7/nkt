@@ -25,7 +25,6 @@ export async function getServerSideProps({ query }) {
       notFound: true,
     };
   }
-}
 
   // JSON serializable data
   let user = null;

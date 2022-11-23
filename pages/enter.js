@@ -30,7 +30,7 @@ export default function Enter(props) {
 // Sign in with Google button
 function SignInButton() {
   const signInWithGoogle = async () => {
-    await signInWithPopup(auth, provider);
+    await signInWithPopup(auth, provider).catch((e) => console.error(e));
   };
 
   return (
