@@ -11,6 +11,8 @@ import {
   query as fQuery,
   doc,
 } from 'firebase/firestore';
+import AuthCheck from '../../components/AuthCheck';
+import ClapCount from '../../components/ClapCount';
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
@@ -69,8 +71,12 @@ export default function Post(props) {
 
       <aside className="card">
         <p>
-          <strong>{post.heartCount || 0} 🤍</strong>
+          <strong>{post.clapCount || 0} ✋</strong>
         </p>
+
+        <AuthCheck>
+          <ClapCount postRef={postRef} />
+        </AuthCheck>
       </aside>
     </main>
   );

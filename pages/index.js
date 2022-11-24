@@ -82,7 +82,7 @@ export default function Home(props) {
           inspired by Dev.to.
         </p>
         <p>
-          Sign up for an 👨‍🎤 account, ✍️ write posts, then 💞 heart content
+          Sign up for an 👨‍🎤 account, ✍️ write posts, then clap 👏 to content
           created by other users. All public content is server-rendered and
           search-engine optimized.
         </p>
