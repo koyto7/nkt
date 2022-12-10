@@ -3,6 +3,7 @@ import { signInWithPopup, signOut } from 'firebase/auth';
 import { writeBatch, doc, getDoc } from 'firebase/firestore';
 import { useContext, useState, useCallback, useEffect } from 'react';
 import { UserContext } from '../lib/context';
+import { useRouter } from 'next/router';
 // lodash import
 import { debounce } from 'lodash';
 
@@ -29,8 +30,11 @@ export default function Enter(props) {
 
 // Sign in with Google button
 function SignInButton() {
+  const router = useRouter();
   const signInWithGoogle = async () => {
     await signInWithPopup(auth, provider).catch((e) => console.error(e));
+    // if successful, redirect to /admin
+    router.push('/admin');
   };
 
   return (

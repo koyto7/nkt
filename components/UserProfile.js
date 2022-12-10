@@ -1,3 +1,6 @@
+import { auth } from '../lib/firebase';
+import { signOut } from 'firebase/auth';
+
 // UI component for user profile
 export function UserProfile({ user }) {
   return (
@@ -7,6 +10,10 @@ export function UserProfile({ user }) {
         <i>@{user.username}</i>
       </p>
       <h1>{user.displayName || 'Anonymous User'}</h1>
+
+      {auth.currentUser && (
+        <button onClick={() => signOut(auth)}>Sign Out</button>
+      )}
     </div>
   );
 }
